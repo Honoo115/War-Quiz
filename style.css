@@ -1,0 +1,15 @@
+#title {
+    font-size: 32px; color: red;
+    text-align: center;
+    background: lightgrey;
+  }
+  body {
+    background-image: url("Images/Test.png");
+  
+    background-repeat: no-repeat;
+  }
+  
+  /* #background { 
+    background-color: white;
+    opacity: 0.5
+  } */
