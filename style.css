@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
 }
-/* body::after {
+body::after {
   content: "";
   background: url(https://images.pexels.com/photos/959938/pexels-photo-959938.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
   opacity: 0.5;
@@ -16,7 +16,7 @@ body {
   position: absolute;
   z-index: -1;
   background-size: cover;
-} */
+}
 button {
   border: 0;
 }
@@ -57,6 +57,10 @@ button {
 .opt {
   flex-basis: 20%;
   margin: 5px;
+  border-radius: 10px;
+}
+.opt:hover {
+  border: solid blue;
 }
 #progress {
   background-color: grey;
@@ -80,4 +84,13 @@ button {
   background-color: #666666;
   min-width: 300px;
   min-height: 200px;
+}
+#start {
+  font-size: 30px;
+  font-weight: 500;
+  border: solid blue;
+  margin-left: 40px;
+}
+#start:hover {
+  border: solid red;
 }
