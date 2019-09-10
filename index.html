@@ -7,34 +7,47 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header id="title">Quiz of The Second World War</header>
-    <button id="start">Test your Knowledge!</button>
-
-    <section id="quiz">
-      <div id="left">
-        <div id="qImg"></div>
-        <p>Image goes Here</p>
+    <header id="title">
+      <h1>Quiz of the Second World War</h1>
+    </header>
+    <main>
+      <section id="start">
+        <button type="button" id="startquiz-btn">Test your Knowledge!</button>
+      </section>
+      <form id="middle" class="hidden">
         <div id="query"><p>Query Goes Here</p></div>
-      </div>
 
-      <div id="options">
-        <button class="opt" id="A" onclick="checkAwnser('A')">A</div>
-        <button class="opt" id="B" onclick="checkAwnser('B')">B</div>
-        <button class="opt" id="C" onclick="checkAwnser('C')">C</div>
-        <button class="opt" id="D" onclick="checkAwnser('D')">D</div>
-      </div>
-    </section>
-    <section id="botm">
-      <div id="progress"><div class="prog"></div></div>
-      <div id="timer">
-        <div id="countdown">Timer goes here</div>
-        <div id="clockout"></div>
-        <div id="clockin"></div>
-      </div>
-      <div id="scoreContainer" style="display : none;">
-        <img src="rank.png" />
-      </div>
-    </section>
-    <!-- <script src="script.js"></script> -->
+        <div id="options">
+          <button class="opt" id="A">A</button>
+          <button class="opt" id="B">B</button>
+          <button class="opt" id="C">C</button>
+          <button class="opt" id="D">D</button>
+        </div>
+        <button id="next" class="hidden">Next Query</button>
+        <div id="progress">
+          <ul id="keeper">
+            <li id="js-answered">
+              Query Number: <span class="qNumber">1</span>/10
+            </li>
+            <li id="js-score">Score: <span class="qCorrect">0</span></li>
+          </ul>
+        </div>
+      </form>
+      <section id="end" class="hidden">
+        <ul id="keeper">
+          <li id="js-answered">
+            Query Number: <span class="qNumber">1</span>/10
+          </li>
+          <li id="js-score">Score: <span class="qCorrect">0</span></li>
+        </ul>
+        <button class="restart" input type="reset">Try Again?</button>
+      </section>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js"></script>
   </body>
 </html>
