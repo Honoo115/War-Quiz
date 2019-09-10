@@ -9,10 +9,9 @@ const myQuiz = {
         "Battle of Monte Cassino",
         "Battle of London Sound"
       ],
-      imgSrc: "images/dunk.jpg",
       correctIndex: 1,
-      correctResponse: "Custom correct response.",
-      incorrectResponse: "Custom incorrect response."
+      correctResponse: "Well done soldier.",
+      incorrectResponse: "Incorrect. The answer is 'The Battle of Dunkirk'"
     },
     {
       q:
@@ -121,26 +120,33 @@ const myQuiz = {
 };
 
 $(function() {
-  console.log("stringtest");
   $("#startquiz-btn").on("click", function() {
     startQuiz();
   });
   $("#middle").on("click", ".opt", function() {
     submitAnswer($(this));
   });
+  $("#next").on("click", function(event) {
+    event.preventDefault();
+    updateQuery(myQuiz);
+  });
+  let questionNumber = $(".qNumber");
+  let questionCorrect = $(".qCorrect");
+  console.log($(".qCorrect").text());
 });
 
 function startQuiz() {
+  questionNumber = $("#end").addClass("hidden");
   $("#start").addClass("hidden");
   $("#middle").removeClass("hidden");
   updateQuery(myQuiz);
-  console.log(myQuiz.queriesCorrect);
-  console.log(myQuiz.queryNumber);
+  // console.log(myQuiz.queriesCorrect);
+  // console.log(myQuiz.queryNumber);
 }
+
 function updateQuery(appState) {
   $("#query").html(appState.questions[appState.queryNumber].q);
   $("#options").empty();
-  $("#qImg");
   let $queries = ``;
   for (
     let i = 0;
@@ -150,12 +156,52 @@ function updateQuery(appState) {
     $queries += `<button class="opt" data-index = "${i}">${appState.questions[appState.queryNumber].options[i]}</button>`;
   }
   $("#options").append($queries);
+  $(`.qNumber`).text(myQuiz.queryNumber);
+  $(`.qNumber`).text(myQuiz.queryNumber + 1);
 }
+function quizEnd() {
+  $("#start").addClass("hidden");
+  $("#middle").addClass("hidden");
+  $("#end").removeClass("hidden");
+  $(".restart").removeClass("hidden");
+  $("#keeper").removeClass("hidden");
+  handleRestart();
+}
+function handleRestart() {
+  $(".restart").on("click", function() {
+    $("#start").removeClass("hidden");
+    $("#middle").addClass("hidden");
+    $("#end").addClass("hidden");
+    location.reload(myQuiz);
+  });
+}
+
 function submitAnswer(chosenQuery) {
   console.log(chosenQuery.data("index"));
+  $("#next").removeClass("hidden");
+  chosenQuery.addClass("selected");
+  // updateQuery(myQuiz);
+  $(".opt")
+    .attr("disabled", "disabled")
+    .addClass("incor");
+  // console.log(myQuiz.questions[myQuiz.queryNumber].correctIndex);
+  let $options = $(".opt");
+  let correctAwnser =
+    $options[myQuiz.questions[myQuiz.queryNumber].correctIndex];
+  $(correctAwnser)
+    .addClass("cor")
+    .removeClass("incor");
+  // console.log($options[myQuiz.questions[myQuiz.queryNumber].correctIndex]);
+  $(".qCorrect").text(myQuiz.queriesCorrect);
+  let selectedResponse = chosenQuery.data("index");
+  let correctAnswer = myQuiz.questions[myQuiz.queryNumber].correctIndex;
+  if (selectedResponse === correctAnswer) {
+    //answer is correct
+    myQuiz.queriesCorrect++;
+  }
+  if (myQuiz.queryNumber === 9) {
+    quizEnd();
+  }
+  $(`.qCorrect`).text(myQuiz.queriesCorrect + 0);
   myQuiz.queryNumber++;
-  updateQuery(myQuiz);
 }
-let $options = $(".opt");
-console.log($(".opt"));
-console.log(myQuiz.questions[0].imgSrc);
