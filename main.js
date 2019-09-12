@@ -123,7 +123,8 @@ $(function() {
   $("#startquiz-btn").on("click", function() {
     startQuiz();
   });
-  $("#middle").on("click", ".opt", function() {
+  $("#middle").on("click", ".opt", function(event) {
+    event.preventDefault();
     submitAnswer($(this));
   });
   $("#next").on("click", function(event) {
@@ -132,7 +133,6 @@ $(function() {
   });
   let questionNumber = $(".qNumber");
   let questionCorrect = $(".qCorrect");
-  console.log($(".qCorrect").text());
 });
 
 function startQuiz() {
@@ -140,8 +140,6 @@ function startQuiz() {
   $("#start").addClass("hidden");
   $("#middle").removeClass("hidden");
   updateQuery(myQuiz);
-  // console.log(myQuiz.queriesCorrect);
-  // console.log(myQuiz.queryNumber);
 }
 
 function updateQuery(appState) {
@@ -172,32 +170,34 @@ function handleRestart() {
     $("#start").removeClass("hidden");
     $("#middle").addClass("hidden");
     $("#end").addClass("hidden");
-    location.reload(myQuiz);
+    location.reload();
   });
 }
 
 function submitAnswer(chosenQuery) {
-  console.log(chosenQuery.data("index"));
+  ``;
   $("#next").removeClass("hidden");
   chosenQuery.addClass("selected");
-  // updateQuery(myQuiz);
+
   $(".opt")
     .attr("disabled", "disabled")
     .addClass("incor");
-  // console.log(myQuiz.questions[myQuiz.queryNumber].correctIndex);
+
   let $options = $(".opt");
   let correctAwnser =
     $options[myQuiz.questions[myQuiz.queryNumber].correctIndex];
   $(correctAwnser)
     .addClass("cor")
     .removeClass("incor");
-  // console.log($options[myQuiz.questions[myQuiz.queryNumber].correctIndex]);
+
   $(".qCorrect").text(myQuiz.queriesCorrect);
   let selectedResponse = chosenQuery.data("index");
   let correctAnswer = myQuiz.questions[myQuiz.queryNumber].correctIndex;
   if (selectedResponse === correctAnswer) {
-    //answer is correct
     myQuiz.queriesCorrect++;
+    alert("Correct!");
+  } else {
+    alert("Incorrect!");
   }
   if (myQuiz.queryNumber === 9) {
     quizEnd();
