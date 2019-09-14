@@ -33,7 +33,7 @@ button {
   font-size: 32px;
   color: red;
   text-align: center;
-  margin: 0;
+  margin-top: 100px;
   padding: 0;
   line-height: 40px;
 }
@@ -84,6 +84,14 @@ button {
   background-color: grey;
 }
 #keeper {
+  list-style: none;
+  text-align: center;
+  font-size: 20px;
+  background-color: #666666;
+  padding: 0px;
+  margin: 0px;
+}
+#endkeeper {
   list-style: none;
   text-align: center;
   font-size: 20px;
